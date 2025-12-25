@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Воспроизведение страницы</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="topbar">
+    <div class="left">
+        <!-- Кнопка-место для картинки Python -->
+        <button class="logo-button" aria-label="Python">
+            <img src="https://camo.githubusercontent.com/6be4ac216b7ab43287258c629dc9e96687208edf6beeedb25afbd44c10cc8f25/68747470733a2f2f63646e332e69636f6e66696e6465722e636f6d2f646174612f69636f6e732f6c6f676f732d616e642d6272616e64732d61646f62652f3531322f3236375f507974686f6e2d3531322e706e67" alt="Python logo" />
+        </button>
+
+        <!-- Три точки -->
+        <div class="dots">
+            <p>Python™</p>
+        </div>
+    </div>
+
+    <!-- Правые кнопки -->
+    <div class="nav-wrap">
+        <nav class="nav" role="navigation" aria-label="Навигация">
+            <button class="nav-button" onclick="location.href='lessons.html'"> Лекции</button>
+            <button class="nav-button" onclick="location.href='index.html'">Главная</button>
+            <button class="nav-button" onclick="location.href='python.html'">Python</button>
+        </nav>
+    </div>
+</header>
+<body>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Задание 1</title>
+  <link rel="stylesheet" href="style3.css">
+</body>
+<body>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Задание 1</title>
+  <link rel="stylesheet" href="style3.css">
+  <script src="https://www.skulpt.org/static/skulpt.min.js"></script>
+  <script src="https://www.skulpt.org/static/skulpt-stdlib.js"></script>
+</body>
+<body>
+  <div class="task">
+    <h2 class="task-title">Задание 1:</h2>
+    <p class="task-desc">Задание: Используя только функцию print(), напишите программу, которая выводит на экран фразу "Здравствуй, мир!".</p>
+
+    <div class="task-main">
+      <div class="robot-col">
+        <img src="c:\Users\Administrator\Downloads\cbc584a9cabd11f088e6f6f1595960a9.jfif" alt="Робот" class="robot-img">
+      </div>
+
+      <div class="bubble">
+        <div class="editor-shell">
+          <div class="gutter" id="gutter">1</div>
+          <textarea id="code" spellcheck="false" placeholder='Напишите здесь код'></textarea>
+        </div>
+
+        <div class="controls">
+          <button id="checkBtn" class="check-btn">Проверить</button>
+          <div id="result" class="result"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+/* Небольшой JS для нумерации строк и проверки ответа */
+(function(){
+  const code = document.getElementById('code');
+  const gutter = document.getElementById('gutter');
+  const btn = document.getElementById('checkBtn');
+  const result = document.getElementById('result');
+
+  function updateGutter(){
+    const lines = code.value.split('\n').length || 1;
+    let nums = [];
+    for(let i=1;i<=lines;i++) nums.push(i);
+    gutter.textContent = nums.join('\n');
+  }
+
+  code.addEventListener('input', updateGutter);
+  code.addEventListener('scroll', () => { gutter.scrollTop = code.scrollTop; });
+
+  // первичная установка
+  updateGutter();
+
+  btn.addEventListener('click', function(){
+    const text = code.value;
+    const re = /prints*(s*(['"])s*Здравствуй,s*мир!s*1s*)s*;?/u;
+    const ok = re.test(text);
+
+    if(ok){
+      result.textContent = 'Правильно!';
+      result.classList.remove('err');
+      result.classList.add('ok');
+      executePythonCode(text);
+    } else {
+      result.textContent = 'Неправильно.';
+      result.classList.remove('ok');
+      result.classList.add('err');
+    }
+  });
+
+  function executePythonCode(code) {
+    Sk.configure({
+      output: function(text) {
+        console.log(text);
+      },
+      read: function(x) {
+        if (Sk.builtinFiles === undefined || Sk.builtinFiles === null) {
+          throw "File not found: '" + x + "'";
+        }
+        return Sk.builtinFiles["files"][x];
+      }
+    });
+    
+    Sk.misceval.asyncToPromise(function() {
+      return Sk.importMainWithBody("<stdin>", false, code, true);
+    }).then(function(mod) {
+      console.log("Execution finished");
+    }, function(err) {
+      console.error(err.toString());
+    });
+  }
+})();
+</script>
+</body>
+</html>

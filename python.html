@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Воспроизведение страницы</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="topbar">
+    <div class="left">
+        <!-- Кнопка-место для картинки Python -->
+        <button class="logo-button" aria-label="Python">
+            <img src="https://camo.githubusercontent.com/6be4ac216b7ab43287258c629dc9e96687208edf6beeedb25afbd44c10cc8f25/68747470733a2f2f63646e332e69636f6e66696e6465722e636f6d2f646174612f69636f6e732f6c6f676f732d616e642d6272616e64732d61646f62652f3531322f3236375f507974686f6e2d3531322e706e67" alt="Python logo" />
+        </button>
+
+        <!-- Три точки -->
+        <div class="dots">
+            <p>Python™</p>
+        </div>
+    </div>
+
+    <!-- Правые кнопки -->
+    <div class="nav-wrap">
+        <nav class="nav" role="navigation" aria-label="Навигация">
+            <button class="nav-button" onclick="location.href='lessons.html'"> Лекции</button>
+            <button class="nav-button" onclick="location.href='tasks.html'">Задания</button>
+            <button class="nav-button" onclick="location.href='index.html'">Главная</button>
+        </nav>
+    </div>
+</header>
+
+<main class="content" role="main">
+    <!-- Пустая область как на картинке -->
+</main>
+
+</body>
+
+  <title>Python-песочница</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Skulpt для выполнения Python в браузере -->
+  <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+</head>
+<body>
+  <main class="workspace">
+    <section class="panel left-panel">
+      <div class="panel-header"></div>
+      <textarea id="codeInput" class="code-area" spellcheck="false">
+      </textarea>
+    </section>
+
+    <section class="panel right-panel">
+      <div class="panel-header header-with-button">
+        <button id="runBtn" class="run-button" title="Запустить код">Запуск</button>
+      </div>
+      <pre id="output" class="output-area" aria-live="polite"></pre>
+    </section>
+  </main>
+
+  <footer class="footer"></footer>
+
+  <script>
+    // Функции для Skulpt
+    function outf(text) {
+      const out = document.getElementById("output");
+      out.textContent += text;
+    }
+    function builtinRead(x) {
+      if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+        throw "File not found: '" + x + "'";
+      return Sk.builtinFiles["files"][x];
+    }
+
+    function runCode() {
+      const prog = document.getElementById("codeInput").value;
+      const output = document.getElementById("output");
+      output.textContent = ""; // очистить вывод
+      // Настроить Skulpt
+      Sk.configure({
+        output: outf,
+        read: builtinRead,
+        // можно задать ограничение времени/стека и т.п. при необходимости
+      });
+      // Запуск асинхронно
+      (Sk.misceval.asyncToPromise(function() {
+        return Sk.importMainWithBody("<stdin>", false, prog, true);
+      })).catch(function(err) {
+        // вывести ошибку в окно вывода
+        output.textContent += err.toString();
+      });
+    }
+
+    document.getElementById("runBtn").addEventListener("click", runCode);
+
+    // Запуск по Ctrl+Enter
+    document.getElementById("codeInput").addEventListener("keydown", function(e) {
+      if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+        e.preventDefault();
+        runCode();
+      }
+    });
+  </script>
+</body>
+</html>

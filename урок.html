@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Воспроизведение страницы</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="topbar">
+    <div class="left">
+        <!-- Кнопка-место для картинки Python -->
+        <button class="logo-button" aria-label="Python">
+            <img src="https://camo.githubusercontent.com/6be4ac216b7ab43287258c629dc9e96687208edf6beeedb25afbd44c10cc8f25/68747470733a2f2f63646e332e69636f6e66696e6465722e636f6d2f646174612f69636f6e732f6c6f676f732d616e642d6272616e64732d61646f62652f3531322f3236375f507974686f6e2d3531322e706e67" alt="Python logo" />
+        </button>
+
+        <!-- Три точки -->
+        <div class="dots">
+            <p>Python™</p>
+        </div>
+    </div>
+
+    <!-- Правые кнопки -->
+    <div class="nav-wrap">
+        <nav class="nav" role="navigation" aria-label="Навигация">
+            <button class="nav-button" onclick="location.href='index.html'">Главная</button>
+            <button class="nav-button" onclick="location.href='tasks.html'">Задания</button>
+            <button class="nav-button" onclick="location.href='python.html'">Python</button>
+        </nav>
+    </div>
+</header>
+<body>
+    <link rel="stylesheet" href="lessons.css" />
+<section id="about-python">
+      <h2>Переменные в Python</h2>
+      <p>Переменные в Python – это имена для хранения данных в памяти. Они служат контейнерами для значений: чисел, строк, списков и других объектов.</p>
+
+<h3>Объявление переменной</h3>
+    <p>Пример объявления переменной и присваивания значения:</p>
+    <code>num = '68'  # Создаем переменную num и присваиваем ей значение 68
+print('значение', num)  # Выводим значение</code>
+
+</section>
+
+    <body class="site-body">
+    <div class="image-container">
+        <img class="centered-pic" src="https://cf.ppt-online.org/files/slide/i/iodfEl1puByPAwNGY2Ms6DvT3OnCZeLXKq85ak/slide-7.jpg">
+    </div>
+    <section id="about-python">
+      <h3>Многократное присвоение</h3>
+    <p>Присвоение одного значения нескольким переменным:</p>
+    <code>num1 = num2 = num3 = 10
+print(num1, num2, num3)</code>
+</section>
+<script>
+    // Функция для копирования кода
+    document.addEventListener('DOMContentLoaded', function() {
+        const codeBlocks = document.querySelectorAll('code');
+        
+        codeBlocks.forEach(block => {
+            block.addEventListener('click', function() {
+                const textToCopy = this.textContent;
+                
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    const originalBorder = this.style.borderLeft;
+                    this.style.borderLeft = '4px solid #4CAF50';
+                    this.style.transition = 'border-left 0.3s ease';
+                    
+                    setTimeout(() => {
+                        this.style.borderLeft = originalBorder;
+                    }, 1000);
+                }).catch(err => {
+                    console.error('Ошибка при копировании: ', err);
+                });
+            });
+            
+            block.title = 'Нажмите, чтобы скопировать код';
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+/* Общие */
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background: #fff;
+  color: #222;
+}
+
+/* Основная рабочая область */
+.workspace {
+  max-width: 1000px;
+  margin: 28px auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+/* Панели */
+.panel {
+  border: 3px solid #66c8ff;
+  min-height: 540px;
+  display: flex;
+  flex-direction: column;
+  background: #fafafa;
+  box-shadow: 0 2px 0 rgba(0,0,0,0.04);
+}
+.panel-header {
+  height: 46px;
+  background: #79c7ff;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* Заголовок панели с кнопкой */
+.header-with-button {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 10px;
+}
+
+/* Зеленая кнопка запуска */
+.run-button {
+  background: linear-gradient(#2f9e2f);
+  color: #dfffe0;
+  padding: 6px 20px;
+  border-radius: 14px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Блоки содержимого панели */
+.code-area {
+  flex: 1;
+  border: none;
+  resize: none;
+  padding: 18px;
+  font-family: "Courier New", monospace;
+  font-size: 15px;
+  line-height: 1.45;
+  color: #0b2b2b;
+  background: #fafafa;
+  outline: none;
+}
+.output-area {
+  flex: 1;
+  margin: 0;
+  padding: 18px;
+  font-family: "Courier New", monospace;
+  font-size: 15px;
+  color: #053;
+  background: #fbfbfb;
+  overflow: auto;
+}
+.editor-shell {
+  display: flex;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  min-height: 90px;
+}
